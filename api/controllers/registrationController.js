@@ -13,13 +13,24 @@ exports.get_all_users = function(req, res) {
 
 
 /**
-Request Model for new user:
+Request Body for new user:
 {
-  "name": "John Doe" (String)
-  "email": "doej@wit.edu" (String)
-  "school": "Wentworth Institute of Technology" (String)
-  "shirtSize": "l" (Char/String)
+  "name": "John Doe" (String required)
+  "birthDate": "01/01/1995" (String required)
+  "gender": "M" (String required)
+  "genderSpecific": "" (String nullable)
+
+  "email": "doej@wit.edu" (String required)
+  "phoneNumber": "123-456-7890" (String required)
+  "school": "Wentworth Institute of Technology" (String required)
+
+  "shirtSize": "l" (String required)
   "isResumeLinkProvided": "true" (boolean nullable)
+  "resumeLink": "http://resumeLink.com/link" (string nullable)
+
+  "dietaryRestriction": "vegetarian" (String nullable)
+  "accommodations": "" (String nullable)
+  "additionalComment": "" (String nullable)
 }
 
 Response Model:
@@ -31,7 +42,7 @@ Response Model:
 
 exports.new_user = function(req, res) {
   const new_user = new User(req.body);
-  new_task.save(function(err, user) {
+  new_user.save(function(err, user) {
     if (err) res.send(err);
     res.json(user);
   });
@@ -40,8 +51,7 @@ exports.new_user = function(req, res) {
 
 exports.user_info = function(req, res) {
   User.findById(req.params.userId, function(err, user) {
-    if (err)
-      res.send(err);
+    if (err) res.send(err);
     res.json(user);
   });
 };

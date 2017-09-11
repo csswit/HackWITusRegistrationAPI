@@ -2,34 +2,33 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-
-/**
-Request Model for new user:
-{
-  "name": "John Doe" (String)
-  "email": "doej@wit.edu" (String)
-  "school": "Wentworth Institute of Technology" (String)
-  "shirtSize": "l" (Char/String)
-  "isResumeLinkProvided": "true" (boolean nullable)
-}
-
-Response Model:
-{
-  resCode: 200
-  if (isResumeLinkProvided) "" else "https://s3.aws.com/link"
-}
-
-
-**/
-
 const UserSchema = new Schema({
   name: {
     type: String,
-    required: 'Need user name!'
+    required: 'Need user\'s name!'
+  },
+  birthDate: {
+    type: String,
+    required: 'Need user\'s age for authorization'
+  },
+  gender: {
+    type: [{
+      type: String,
+      enum: ['Male', 'Female', 'Others', 'Prefer not to answer']
+    }],
+    default: ['Prefer not to answer'],
+    required: 'Need user\'s gender'
+  },
+  genderSpecific: {
+    type: String
   },
   email: {
     type: String,
-    required: 'Need user email!'
+    required: 'Need user\'s email!'
+  },
+  phoneNumber: {
+    type: String,
+    required: 'need user\'s phone number'
   },
   school: {
     type: String,
@@ -40,9 +39,19 @@ const UserSchema = new Schema({
       type: String,
       enum: ['xs', 's', 'm', 'l', 'xl']
     }],
-    default: ['l']
+    default: ['m'],
+    required: 'Need user\'s shirt size'
   },
   resumeURL: {
+    type: String
+  },
+  dietaryRestriction: {
+    type: String,
+  },
+  accommodations: {
+    type: String,
+  },
+  additionalComment: {
     type: String
   },
   createdDate: {
