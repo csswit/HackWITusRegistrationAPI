@@ -30,10 +30,8 @@ const UserSchema = new Schema({
     required: 'Need user\'s school'
   },
   shirtSize: {
-    type: [{
-      type: String,
-      enum: ['xs', 's', 'm', 'l', 'xl']
-    }],
+    type: String,
+    enum: ['xs', 's', 'm', 'l', 'xl'],
     default: ['m'],
     required: 'Need user\'s shirt size'
   },
