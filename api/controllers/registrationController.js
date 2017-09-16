@@ -7,6 +7,7 @@ const mongoose = require('mongoose'),
 exports.get_all_users = function(req, res) {
   User.find({}, function(err, user) {
     if (err) res.send(err);
+    console.log(user);
     res.json(user);
   });
 };
@@ -17,8 +18,7 @@ Request Body for new user:
 {
   "name": "John Doe" (String required)
   "birthDate": "01/01/1995" (String required)
-  "gender": "M" (String required)
-  "genderSpecific": "" (String nullable)
+  "gender": "Male" (String required)
 
   "email": "doej@wit.edu" (String required)
   "phoneNumber": "123-456-7890" (String required)
@@ -26,7 +26,7 @@ Request Body for new user:
 
   "shirtSize": "l" (String required)
   "isResumeLinkProvided": "true" (boolean nullable)
-  "resumeLink": "http://resumeLink.com/link" (string nullable)
+  "resumeURL": "http://resumeLink.com/link" (string nullable)
 
   "dietaryRestriction": "vegetarian" (String nullable)
   "accommodations": "" (String nullable)
@@ -36,7 +36,6 @@ Request Body for new user:
 Response Model:
 {
   resCode: 200
-  if (isResumeLinkProvided) "" else "https://s3.aws.com/link"
 }
 **/
 

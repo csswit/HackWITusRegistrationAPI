@@ -4,11 +4,14 @@ const express = require('express'),
   mongoose = require('mongoose'),
   User = require('./api/models/registrationModel'), //created model loading here
   bodyParser = require('body-parser');
-require('dotenv').config()
+require('dotenv').config();
 
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/HackWITusUserdb');
+const mongoURI=`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DBSRC}`
+const options= {useMongoClient: true}
+
+mongoose.connect(mongoURI, options);
 
 
 app.use(bodyParser.urlencoded({ extended: true }));

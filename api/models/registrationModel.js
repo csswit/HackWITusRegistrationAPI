@@ -12,15 +12,9 @@ const UserSchema = new Schema({
     required: 'Need user\'s age for authorization'
   },
   gender: {
-    type: [{
-      type: String,
-      enum: ['Male', 'Female', 'Others', 'Prefer not to answer']
-    }],
-    default: ['Prefer not to answer'],
+    type: String,
+    default: 'Prefer not to answer',
     required: 'Need user\'s gender'
-  },
-  genderSpecific: {
-    type: String
   },
   email: {
     type: String,
