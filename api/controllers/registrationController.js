@@ -4,12 +4,27 @@
 const mongoose = require('mongoose'),
   User = mongoose.model('Users');
 
+
+const nodemailer = require('nodemailer');
+const transporter = nodemailer.createTransport({
+  host: process.env.EMAIL_HOST,
+  port: process.env.EMAIL_PORT,
+  secure: true,
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.EMAIL_PASS
+  }
+});
+
+
+
 exports.get_all_users = function(req, res) {
-  User.find({}, function(err, user) {
-    if (err) res.send(err);
-    console.log(user);
-    res.json(user);
+  const currentDate = new Date()
+  res.writeHead(200, {
+        'Content-Type': 'text/csv',
+        'Content-Disposition': `attachment; filename=${currentDate.getMonth()+1}${currentDate.getDate()}${currentDate.getFullYear()}_HackerList.csv`
   });
+  User.find({}).csv(res);
 };
 
 
@@ -43,7 +58,19 @@ exports.new_user = function(req, res) {
   const new_user = new User(req.body);
   new_user.save(function(err, user) {
     if (err) res.send(err);
-    res.json(user);
+    const mailOptions = {
+      from: process.env.EMAIL,
+      to: user.email,
+      subject: 'Confirmation for HackWITus',
+      text: 'Get ready to hype'
+    };
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) console.log(error)
+      else {
+        console.log('Email sent: ' + info.response);
+        res.json(user);
+      }
+    });
   });
 };
 

@@ -1,5 +1,6 @@
 'use strict';
 const mongoose = require('mongoose');
+const mongoose_csv = require('mongoose-csv');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -53,5 +54,6 @@ const UserSchema = new Schema({
     default: Date.now
   }
 });
+UserSchema.plugin(mongoose_csv);
 
 module.exports = mongoose.model('Users', UserSchema);
