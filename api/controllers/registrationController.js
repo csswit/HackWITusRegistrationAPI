@@ -62,7 +62,7 @@ exports.new_user = function(req, res) {
       from: process.env.EMAIL,
       to: user.email,
       subject: 'Confirmation for HackWITus',
-      html: "Hey There!<br/> You've been registered for HackWITus Fall 2017! Please be at <a href=\"https://goo.gl/maps/MUGpse7Lp3t\"><b>Ira Allen Building, 540 Parker St, Boston MA 02120</b></a> by <b>12:00PM</b> <i>(doors will opened at 9:00AM)</i> on <b>November 18th</b>. Let us know if you have any questions or concerns by getting in touch with us at <a href=\"mailto:contact@hackwit.us\">contact@hackwit.us</a>.<br/><br/>We look forward to seeing you!<br/>The HackWITus Team "
+      html: "Hey There!<br/><br/> You've been registered for HackWITus Fall 2017! Please be at <a href=\"https://goo.gl/maps/MUGpse7Lp3t\"><b>Ira Allen Building, 540 Parker St, Boston MA 02120</b></a> by <b>12:00PM</b> <i>(doors will opened at 9:00AM)</i> on <b>November 18th</b>. Let us know if you have any questions or concerns by getting in touch with us at <a href=\"mailto:contact@hackwit.us\">contact@hackwit.us</a>.<br/><br/>We look forward to seeing you!<br/>The HackWITus Team "
     };
     transporter.sendMail(mailOptions, function(error, info){
       if (error) console.log(error)
