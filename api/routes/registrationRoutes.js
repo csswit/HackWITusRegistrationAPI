@@ -3,12 +3,16 @@ module.exports = function(app) {
   const userList = require('../controllers/registrationController');
   const jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
-  app.post('/users',userList.new_user)
-
   app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
+    next()
+  })
+
+  app.post('/users',userList.new_user)
+
+  app.use(function(req, res, next) {
     // check header or url parameters or post parameters for token
     let token = req.body.token || req.query.token || req.headers['x-access-token'];
 
