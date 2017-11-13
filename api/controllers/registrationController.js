@@ -56,6 +56,16 @@ Response Model:
 }
 **/
 
+exports.user_rsvp = function(req, res){
+  User.findOneAndUpdate({email: req.body.email}, req.body, {new:false}, (err, user) => {
+    if (err) 
+      res.send(err)
+    else {
+      res.json(user);
+    }
+  })
+}
+
 exports.new_user = function(req, res) {
   const new_user = new User(req.body);
   new_user.save(function(err, user) {

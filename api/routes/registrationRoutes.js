@@ -11,6 +11,7 @@ module.exports = function(app) {
   })
 
   app.post('/users',userList.new_user)
+  app.post('/rsvp',userList.user_rsvp)
 
   app.use(function(req, res, next) {
     // check header or url parameters or post parameters for token

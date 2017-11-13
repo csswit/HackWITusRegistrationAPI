@@ -50,6 +50,11 @@ const UserSchema = new Schema({
   createdDate: {
     type: Date,
     default: Date.now
+  },
+  rsvp: {
+    type: String,
+    enum: ['y','na','n'],
+    default: ['na']
   }
 });
 UserSchema.plugin(mongoose_csv);
