@@ -57,7 +57,7 @@ Response Model:
 **/
 
 exports.user_rsvp = function(req, res){
-  User.findOneAndUpdate({email: req.body.email}, req.body, {new:false}, (err, user) => {
+  User.findOneAndUpdate({email: { $regex: new RegExp("^" + req.body.email.toLowerCase(), "i") }}, req.body, {new:false}, (err, user) => {
     if (err) 
       res.send(err)
     else {
